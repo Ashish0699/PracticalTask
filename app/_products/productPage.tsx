@@ -100,8 +100,8 @@ const ProductPage = (props: ProductPageProps) => {
               <ProductCard
                 key={product.id}
                 product={product}
-                onAddToCart={
-                  () => dispatch(addToCart({ ...product, quantity: 1 })) // Ensure 'quantity' is added
+                onAddToCart={() =>
+                  dispatch(addToCart({ ...product, quantity: 1 }))
                 }
                 cartItems={cartItems}
                 setIsCartOpen={setIsCartOpen}
