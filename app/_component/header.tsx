@@ -7,11 +7,11 @@ interface HeaderProps {
   cartItemCount?: number;
   onCartClick?: () => void;
   doLogout: () => void;
-  taskList?: boolean;
+  homePage?: boolean;
 }
 
 const Header = (props: HeaderProps) => {
-  const { cartItemCount, onCartClick, doLogout, taskList } = props;
+  const { cartItemCount, onCartClick, doLogout, homePage } = props;
 
   const handleCartClick = () => {
     if (onCartClick) onCartClick();
@@ -33,13 +33,7 @@ const Header = (props: HeaderProps) => {
               <span className="text-xl font-semibold">Home</span>
             </Link>
             <Link
-              href="/taskListing"
-              className="flex items-center no-underline text-black"
-            >
-              <span className="text-xl font-semibold">task Listing</span>
-            </Link>
-            <Link
-              href="/dashboard"
+              href="/product"
               className="flex items-center no-underline text-black"
             >
               <span className="text-xl font-semibold">Product</span>
@@ -47,18 +41,17 @@ const Header = (props: HeaderProps) => {
           </div>
 
           <div className="flex items-center gap-5">
-            {!taskList && (
+            {!homePage && (
               <Button
                 type="text"
                 className="relative hover:bg-gray-100 rounded-full p-2"
                 onClick={handleCartClick}
               >
                 <ShoppingCart className="h-6 w-6" />
-                {cartItemCount && cartItemCount > 0 && (
-                  <span className="absolute -top-1 -right-1  bg-blue-500 text-white  text-xm font-medium rounded-full h-5 w-5 flex items-center justify-center">
-                    {cartItemCount}
-                  </span>
-                )}
+
+                <span className="absolute -top-1 -right-1  bg-blue-500 text-white  text-xm font-medium rounded-full h-5 w-5 flex items-center justify-center">
+                  {cartItemCount}
+                </span>
               </Button>
             )}
             <Button

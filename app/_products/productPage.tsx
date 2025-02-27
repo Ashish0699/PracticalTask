@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { Product } from "../_component/types/product";
-import { useQuery } from "@tanstack/react-query";
 import Pagination from "../_component/pagination";
 import ProductCard from "../_component/productCard";
 import SearchComponent from "../_component/searchComponent";
@@ -11,22 +10,9 @@ import NotFoundProduct from "../_component/Ui/notFoundProduct";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../_redux/store";
 import { addToCart, updateQuantity } from "../_redux/cartSlice";
+import { getProductList } from "../_redux/services/product.api";
 
 const ITEMS_PER_PAGE = 5;
-
-const fetchProducts = async () => {
-  try {
-    const response = await fetch("https://fakestoreapi.com/products");
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
-    return data as Product[];
-  } catch (error) {
-    console.error("Error fetching products:", error);
-    throw error;
-  }
-};
 
 interface ProductPageProps {
   isCartOpen: boolean;
@@ -40,11 +26,8 @@ const ProductPage = (props: ProductPageProps) => {
   const [searchTerm, setSearchTerm] = useState("");
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const dispatch = useDispatch();
-
-  const { data: products, isLoading } = useQuery({
-    queryKey: ["products"],
-    queryFn: fetchProducts,
-  });
+  const [products, setProducts] = useState([]);
+  const [isLoading, setLoading] = useState(false);
 
   const filteredProducts = products?.filter((product: Product) =>
     product.title.toLowerCase().includes(searchTerm.toLowerCase())
@@ -59,6 +42,23 @@ const ProductPage = (props: ProductPageProps) => {
     startIndex + ITEMS_PER_PAGE
   );
 
+  const fetchProducts = async () => {
+    try {
+      setLoading(true);
+      const response = await getProductList();
+      if (response.data) {
+        setProducts(response.data);
+        setLoading(false);
+      }
+    } catch (error) {
+      setLoading(false);
+      console.error("Error fetching products:", error);
+      return [];
+    }
+  };
+  useEffect(() => {
+    fetchProducts();
+  }, []);
   useEffect(() => {
     setCurrentPage(1);
   }, [searchTerm]);

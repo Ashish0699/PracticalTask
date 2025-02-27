@@ -3,7 +3,8 @@ export const PAGE_SLUG = {
   SIGNIN: "/login",
   SIGNUP: "/signup",
   DASHBOARD: "/dashboard",
-  PRODUCTPAGE: "/productPage",
+  PRODUCTPAGE: "/product",
+  
 };
 
 export const validationRules = {

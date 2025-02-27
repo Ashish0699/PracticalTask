@@ -7,9 +7,10 @@ import { useRouter } from "next/navigation";
 import { useCookies } from "react-cookie";
 import { toast } from "react-toastify";
 import { loginAPI } from "../_redux/services/auth.api";
+import { PAGE_SLUG } from "../_libs/constant";
 
 const LoginPage = () => {
-  const { register, formState, control, handleSubmit } = useForm<FieldValues>();
+  const { register, formState, control, handleSubmit,reset } = useForm<FieldValues>();
   const [isloding, setIsLoding] = useState(false);
 
   const router = useRouter();
@@ -25,7 +26,8 @@ const LoginPage = () => {
           setCookie("x-session-token", response.data.access_token);
           console.log("cookies", cookies);
           toast.success("Login successfully!");
-          router.push("/taskListing");
+          reset()
+          router.push(PAGE_SLUG.DASHBOARD);
         }
       } else {
         toast.error("Invalid credentials. Please try again.");

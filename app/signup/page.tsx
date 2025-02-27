@@ -7,7 +7,8 @@ import { toast } from "react-toastify";
 import { getUserList, signupAPI } from "../_redux/services/auth.api";
 
 const SignUpPage = () => {
-  const { register, formState, control, handleSubmit } = useForm<FieldValues>();
+  const { register, formState, control, handleSubmit, reset } =
+    useForm<FieldValues>();
   const [isloding, setIsLoding] = useState(false);
 
   const handleSignUp = async (data: FieldValues) => {
@@ -29,6 +30,7 @@ const SignUpPage = () => {
           if (response && response.data) {
             toast.success("signUp successfully!");
             setIsLoding(false);
+            reset();
           }
         } else {
           toast.error("Email already exists!");

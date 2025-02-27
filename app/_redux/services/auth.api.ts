@@ -24,3 +24,11 @@ export const loginAPI = async (payload: any) => {
     },
   });
 };
+
+export const getUserProfileAPI = async (accessToken: any) => {
+  return axios.get("https://api.escuelajs.co/api/v1/auth/profile", {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+};
