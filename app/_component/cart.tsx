@@ -105,7 +105,7 @@ const Cart = (props: CartProps) => {
                             dispatch(
                               updateQuantity({
                                 id: item.id,
-                                quantity: item.quantity + 1,
+                                quantity: item.quantity - 1,
                               })
                             )
                           }
