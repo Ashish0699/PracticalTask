@@ -10,6 +10,7 @@ import { getUserProfileAPI } from "../_redux/services/auth.api";
 const Page = () => {
   const [cookies, , removeCookie] = useCookies(["x-session-token"]);
   const [userprofileData, setUserProfileData] = useState<any>();
+
   const doLogout = () => {
     console.log("cookies: ", cookies);
     removeCookie("x-session-token", { path: PAGE_SLUG.HOME });
@@ -30,13 +31,15 @@ const Page = () => {
 
   useEffect(() => {
     getUserProfile();
-  }, []);
+  },);
 
   return (
     <>
       <Header doLogout={doLogout} homePage={true} />
       <div className="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-24 pb-16">
-        <h1 className="text-3xl font-bold text-gray-900">Welcome, {userprofileData?.name || "Guest"}</h1>
+        <h1 className="text-3xl font-bold text-gray-900">
+          Welcome, {userprofileData?.name || "Guest"}
+        </h1>
       </div>
     </>
   );
