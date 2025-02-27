@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export const PAGE_SLUG = {
   HOME: "/",
   SIGNIN: "/login",
@@ -29,6 +30,11 @@ export const validationRules = {
       message: "Password must be at least 6 characters long",
     },
   },
+  confirmPassword: (getValues: any) => ({
+    required: "Confirm Password is required",
+    validate: (value: any) =>
+      value === getValues("password") || "Passwords do not match",
+  }),
 };
 
 export const TOAST_MESSAGE_DELAY = 5;

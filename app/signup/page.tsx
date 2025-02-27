@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 
 const SignUpPage = () => {
   const router = useRouter();
-  const { register, formState, control, handleSubmit, reset } =
+  const { register, formState, control, handleSubmit, reset ,getValues} =
     useForm<FieldValues>();
   const [isloding, setIsLoding] = useState(false);
 
@@ -57,6 +57,7 @@ const SignUpPage = () => {
           handleSubmit,
           handleSignUp,
           isloding,
+          getValues
         }}
       />
     </>

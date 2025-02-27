@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Link from "next/link";
 import React, { useState } from "react";
 import {
@@ -20,11 +21,21 @@ interface SignUpSceneProps {
   handleSubmit: UseFormHandleSubmit<FieldValues>;
   handleSignUp: (data: FieldValues) => void;
   isloding?: boolean;
+  getValues: (name?: string) => any;
 }
 
 const SignUpScene = (props: SignUpSceneProps) => {
-  const { register, formState, handleSubmit, handleSignUp, isloding } = props;
+  const {
+    register,
+    formState,
+    handleSubmit,
+    handleSignUp,
+    isloding,
+    getValues,
+  } = props;
+
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   return (
     <>
       <div className={`${Style.signupContainer}`}>
@@ -63,12 +74,38 @@ const SignUpScene = (props: SignUpSceneProps) => {
                 {showPassword ? (
                   <EyeOff
                     onClick={() => setShowPassword(!showPassword)}
-                    className="text-black"
+                    className="text-black cursor-pointer"
                   />
                 ) : (
                   <Eye
                     onClick={() => setShowPassword(!showPassword)}
-                    className="text-black"
+                    className="text-black cursor-pointer"
+                  />
+                )}
+              </div>
+            </div>
+
+            <div className="flex items-center relative">
+              <div className="w-full">
+                <InputField
+                  type={showConfirmPassword ? "text" : "password"}
+                  name="confirmPassword"
+                  placeholder="Confirm Password"
+                  register={register}
+                  validationRules={validationRules.confirmPassword(getValues)}
+                  errors={formState.errors}
+                />
+              </div>
+              <div className="absolute right-0 top-0 mt-4 mr-3">
+                {showConfirmPassword ? (
+                  <EyeOff
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    className="text-black cursor-pointer"
+                  />
+                ) : (
+                  <Eye
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    className="text-black cursor-pointer"
                   />
                 )}
               </div>
