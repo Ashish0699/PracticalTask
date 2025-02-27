@@ -5,8 +5,11 @@ import { FieldValues, useForm } from "react-hook-form";
 import SignUpScene from "./signUpScene";
 import { toast } from "react-toastify";
 import { getUserList, signupAPI } from "../_redux/services/auth.api";
+import { PAGE_SLUG } from "../_libs/constant";
+import { useRouter } from "next/navigation";
 
 const SignUpPage = () => {
+  const router = useRouter();
   const { register, formState, control, handleSubmit, reset } =
     useForm<FieldValues>();
   const [isloding, setIsLoding] = useState(false);
@@ -31,6 +34,7 @@ const SignUpPage = () => {
             toast.success("signUp successfully!");
             setIsLoding(false);
             reset();
+            router.push(PAGE_SLUG.SIGNIN);
           }
         } else {
           toast.error("Email already exists!");
