@@ -36,7 +36,7 @@ export const InputField = (props: InputFieldProps) => {
         {...rest}
       />
 
-      {/* Show error message if exists */}
+      {/* Show error message  */}
       {typeof errors?.[name]?.message === "string" && (
         <span style={{ color: "red", fontSize: "12px" }}>
           {errors?.[name]?.message}
