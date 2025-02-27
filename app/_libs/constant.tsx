@@ -36,5 +36,3 @@ export const validationRules = {
       value === getValues("password") || "Passwords do not match",
   }),
 };
-
-export const TOAST_MESSAGE_DELAY = 5;
