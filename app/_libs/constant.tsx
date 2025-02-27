@@ -4,18 +4,11 @@ export const PAGE_SLUG = {
   SIGNUP: "/signup",
   DASHBOARD: "/dashboard",
   PRODUCTPAGE: "/product",
-  
 };
 
 export const validationRules = {
   name: {
     required: "name is required",
-  },
-  firstName: {
-    required: "First name is required",
-  },
-  lastName: {
-    required: "Last name is required",
   },
   email: {
     required: "Email is required",

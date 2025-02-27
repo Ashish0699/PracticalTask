@@ -39,22 +39,6 @@ const SignUpScene = (props: SignUpSceneProps) => {
               validationRules={validationRules.name}
               errors={formState.errors}
             />
-            {/* <InputField
-              type="text"
-              name="firstName"
-              placeholder="Enter First Name"
-              register={register}
-              validationRules={validationRules.firstName}
-              errors={formState.errors}
-            /> */}
-            {/* <InputField
-              type="text"
-              name="lastName"
-              placeholder="Enter Last Name"
-              register={register}
-              validationRules={validationRules.lastName}
-              errors={formState.errors}
-            /> */}
 
             <InputField
               type="email"
